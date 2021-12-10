@@ -20,8 +20,8 @@ export const onReadOne = async (req, res) => {
 
 export const onLogin = async (req, res) => {
   try {
-    const { lineUUID, name = "", profile = "" } = req.body;
-    const result = await UserService.login({ lineUUID, name, profile });
+    console.log("On Login");
+    const result = await UserService.getUserAfterLogin(req.user);
     res.status(200).send(result);
   } catch (error) {
     res.status(403).send({ error });

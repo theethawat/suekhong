@@ -2,7 +2,6 @@ import _ from "lodash";
 
 import UserModel from "../models/User";
 import middleware from "../middleware/auth";
-
 export const readAllUser = async () => {
   try {
     const user = await UserModel.find({});
@@ -22,25 +21,16 @@ export const readOneUser = async (id) => {
   }
 };
 
-export const login = async (data) => {
+export const getUserAfterLogin = async (data) => {
   try {
-    const { lineUUID = "", name = "", profile = "" } = data;
-    const loggedInUser = await UserModel.findOne({ lineUUID });
-    if (loggedInUser && !_.isEmpty(loggedInUser)) {
-      const payload = {
-        ...loggedInUser.toJSON(),
-        authToken: middleware.generateToken({ lineUUID }),
-      };
-      return payload;
-    } else {
-      const newUser = await createOneUser({ lineUUID, name, profile });
-      const payload = {
-        ...newUser,
-        authToken: middleware.generateToken({ lineUUID }),
-      };
-      return payload;
-    }
-  } catch (error) {}
+    const payload = {
+      ...data,
+      authToken: middleware.generateToken({ username: data?.username }),
+    };
+    return payload;
+  } catch (error) {
+    throw Error("LOGIN_FAIL Logging in Fail cannot find user");
+  }
 };
 
 export const createOneUser = async (payload) => {
@@ -77,5 +67,5 @@ export default {
   readOneUser,
   updateOneUser,
   deleteOneUser,
-  login,
+  getUserAfterLogin,
 };
