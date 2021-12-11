@@ -3,7 +3,7 @@
     "browser": true,
     "commonjs": true,
     "es2021": true,
-    "es6": true
+    "node": true
   },
   "extends": [
     "airbnb",
@@ -11,7 +11,12 @@
     "plugin:react/recommended",
     "plugin:react/jsx-runtime"
   ],
-  "parser": "@babel/eslint-parser",
+
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "parserOptions": {
     "sourceType": "module",
     "requireConfigFile": false,
@@ -20,11 +25,13 @@
       "jsx": true
     }
   },
-  "plugins": ["react"],
+  "plugins": ["react", "jsx-a11y", "react-hooks"],
   "rules": {
     "linebreak-style": "off",
     "no-console": "off",
     "semi": "off",
-    "react/jsx-filename-extension": "off"
+    "react/jsx-filename-extension": "off",
+    "react/function-component-definition": "off",
+    "react/jsx-uses-react": "error"
   }
 }
