@@ -1,23 +1,21 @@
-import passport from "passport";
-import { Strategy as LocalStrategy } from "passport-local";
-import UserModel from "../models/User";
+import passport from 'passport';
+import { Strategy as LocalStrategy } from 'passport-local';
+import UserModel from '../models/User';
 
 passport.use(
   new LocalStrategy((username, password, done) => {
-    UserModel.findOne({ username: username })
+    UserModel.findOne({ username })
       .then((user) => {
         if (!user) {
-          return done(null, false, { message: "Incorrect Username" });
+          return done(null, false, { message: 'Incorrect Username' });
         }
         if (!user.validPassword(password, user)) {
-          return done(null, false, { message: "Incorrect Password" });
+          return done(null, false, { message: 'Incorrect Password' });
         }
-        return done(null, user?.toJSON());
+        return done(null, user.toJSON());
       })
-      .catch((err) => {
-        return done(err);
-      });
-  })
+      .catch((err) => done(err));
+  }),
 );
 
 passport.serializeUser((user, done) => {
