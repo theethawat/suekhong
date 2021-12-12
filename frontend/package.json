@@ -2,21 +2,28 @@
   "name": "tdc-frontend",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "dependencies": {
+    "@mantine/core": "^3.3.5",
+    "@mantine/hooks": "^3.3.5",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "postcss": "^8.4.4",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-router": "^6.1.1",
+    "react-router-dom": "^6.1.1",
     "react-scripts": "4.0.3",
+    "tailwindcss": "^3.0.1",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:tw": "npx tailwindcss -i ./src/assets/index.css -o ./src/assets/output.css "
   },
   "browserslist": {
     "production": [
@@ -34,6 +41,7 @@
     "@babel/eslint-parser": "^7.16.3",
     "@babel/plugin-syntax-jsx": "^7.16.0",
     "@babel/preset-react": "^7.16.0",
+    "autoprefixer": "^10.4.0",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "^19.0.2",
     "eslint-plugin-import": "^2.25.3",

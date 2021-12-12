@@ -2,3 +2,6 @@ node_modules/
 src/index.js
 src/setupTest.js
 src/reportWebVitals.js
+
+tailwind.config.js
+postcss.config.js
