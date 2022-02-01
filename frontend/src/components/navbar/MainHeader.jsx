@@ -1,11 +1,10 @@
 import React from 'react'
-import { Header } from '@mantine/core'
 
 const MainHeader = () => (
-  <Header height={60} padding="xs">
+  <div>
     {/* Header content */}
     Hello
-  </Header>
+  </div>
 )
 
 export default MainHeader

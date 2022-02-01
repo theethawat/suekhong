@@ -1,11 +1,20 @@
 import React from 'react'
-import { Navbar } from '@mantine/core'
+import { Pane, Button } from 'evergreen-ui'
 
 const MainNavbar = () => (
-  <Navbar width={{ base: 300 }} height={500} padding="xs">
+  <div>
     {/* Navbar content */}
-    Hi
-  </Navbar>
+    <Pane display="flex" padding={16} background="tint2" borderRadius={3}>
+      <Pane flex={1} alignItems="center" display="flex">
+        <h1 className="text-lg font-semibold">Header</h1>
+      </Pane>
+      <Pane>
+        {/* Below you can see the marginRight property on a Button. */}
+        <Button marginRight={16}>Button</Button>
+        <Button appearance="primary">Primary Button</Button>
+      </Pane>
+    </Pane>
+  </div>
 )
 
 export default MainNavbar
