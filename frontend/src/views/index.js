@@ -1,4 +1,5 @@
 import Auth from './Auth'
+import Home from './Home'
 
-export { Auth }
-export default { Auth }
+export { Auth, Home }
+export default { Auth, Home }

@@ -11,7 +11,7 @@ import './configs/mongo';
 const app = express();
 
 // Using Middleware
-app.use(cors());
+app.use(cors({}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(passport.initialize());

@@ -2,16 +2,26 @@ import React from 'react'
 import { useNavigate } from 'react-router'
 import { TextInput, Button } from '@mantine/core'
 import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 
 import { AuthLayout } from '../../components/layouts'
+import * as actions from '../../redux/actions'
 
 export default function Login() {
   const navigate = useNavigate()
   const { register, handleSubmit } = useForm()
+  const dispatch = useDispatch()
 
   const handleLogin = (data) => {
-    console.log(data)
+    dispatch(actions.meLogin(data))
+      .then(() => {
+        navigate('/')
+      })
+      .catch((err) => {
+        window.alert(err?.message)
+      })
   }
+
   return (
     <AuthLayout title="Login">
       <div>

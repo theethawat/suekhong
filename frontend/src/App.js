@@ -4,7 +4,7 @@ import { Routes, BrowserRouter, Route } from 'react-router-dom'
 import { MantineProvider } from '@mantine/core'
 import { Provider } from 'react-redux'
 
-import { Auth } from './views'
+import { Auth, Home } from './views'
 import './index.css'
 import configureStore from './redux/configureStore'
 
@@ -24,7 +24,7 @@ function App() {
                 <Route path="dashboard">
                   <Route index element={<div>dashboard index</div>} />
                 </Route>
-                <Route index element={<div>Home</div>} />
+                <Route index element={<Home />} />
               </Routes>
             ) : (
               <Routes>

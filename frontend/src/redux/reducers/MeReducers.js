@@ -1,4 +1,4 @@
-import { ME_ERROR, ME_GET, ME_LOGIN } from '../type'
+import { ME_ERROR, ME_GET, ME_LOGIN, ME_RESET } from '../type'
 
 const initialState = { isReady: false }
 
@@ -12,6 +12,8 @@ export default function MeReducer(state = initialState, action) {
       return { ...action.payload, isReady: false }
     case ME_ERROR:
       return { ...action.payload, isReady: false }
+    case ME_RESET:
+      return { isReady: false }
     default:
       return state
   }
