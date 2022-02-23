@@ -8,4 +8,5 @@ export default {
   dbConnectionString:
     process.env.MONGO_DB_URI || 'mongodb://localhost:27017/tdcmedical',
   secret: process.env.SECRET || 'TDC-CreateForBetter',
+  defaultLimit: 10,
 };

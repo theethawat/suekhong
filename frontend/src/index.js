@@ -1,11 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { MantineProvider } from '@mantine/core'
+import { Provider } from 'react-redux'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 
+import './index.css'
+import configureStore from './redux/configureStore'
+
+const store = configureStore()
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <MantineProvider>
+        <App />
+      </MantineProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root'),
 )

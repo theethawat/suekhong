@@ -27,9 +27,7 @@ export default function AuthLayout({ title, children }) {
                       alt="Workflow"
                     />
                   </div>
-                  <div className="text-xl font-display font-semibold">
-                    Bangriang
-                  </div>
+                  <div className="text-xl font-display font-semibold">Bangriang</div>
                 </div>
               </div>
             </div>
@@ -38,16 +36,14 @@ export default function AuthLayout({ title, children }) {
 
         <header className="bg-white shadow">
           <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold text-gray-900">{title}</h1>
+            <h1 className="text-2xl font-display font-bold text-gray-900">{title}</h1>
           </div>
         </header>
         <main>
           <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-6">
             {/* Replace with your content */}
             <div className="px-4 py-6 sm:px-0">
-              <div className="border-2  border-gray-200 rounded-lg min-h-screen p-4">
-                {children}
-              </div>
+              <div className="border-2  border-gray-200 rounded-lg min-h-screen p-4">{children}</div>
             </div>
             {/* /End replace */}
           </div>
@@ -59,10 +55,7 @@ export default function AuthLayout({ title, children }) {
 
 AuthLayout.propTypes = {
   title: PropTypes.string,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 }
 
 AuthLayout.defaultProps = {

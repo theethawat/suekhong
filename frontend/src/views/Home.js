@@ -1,15 +1,12 @@
 import React from 'react'
 import { MainLayout } from '../components/layouts'
-import PropTypes from 'prop-types'
 
-function Home(props) {
+function Home() {
   return (
-    <MainLayout title="Home">
+    <MainLayout title="Home" currentPage="Home">
       <div>Home</div>
     </MainLayout>
   )
 }
-
-Home.propTypes = {}
 
 export default Home

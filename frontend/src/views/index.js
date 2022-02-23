@@ -1,5 +1,6 @@
 import Auth from './Auth'
 import Home from './Home'
+import Management from './Management'
 
-export { Auth, Home }
-export default { Auth, Home }
+export { Auth, Home, Management }
+export default { Auth, Home, Management }

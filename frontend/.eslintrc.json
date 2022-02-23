@@ -17,6 +17,8 @@
     "react/jsx-filename-extension": "off",
     "react/jsx-one-expression-per-line": "off",
     "react/jsx-props-no-spreading": "off",
-    "no-param-reassign": "warn"
+    "no-param-reassign": "warn",
+    "no-underscore-dangle": "off",
+    "implicit-arrow-linebreak": "off"
   }
 }

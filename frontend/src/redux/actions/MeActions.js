@@ -1,25 +1,24 @@
 /* eslint-disable indent */
 /* eslint-disable import/prefer-default-export */
 import { api } from '../../configs'
-import { ME_ERROR, ME_GET, ME_LOGIN, ME_RESET } from '../type'
+import { ME_ERROR, ME_GET, ME_LOGIN } from '../type'
 
 export const meLogin =
   ({ username, password }) =>
   async (dispatch) => {
     try {
-      const { data, status } = await api.post(
-        `${process.env.REACT_APP_API_URL}/user/login`,
-        {
-          username,
-          password,
-        },
-      )
+      const { data, status } = await api.post(`${process.env.REACT_APP_API_URL}/user/login`, {
+        username,
+        password,
+      })
 
       if (data && status === 200) {
         dispatch({ type: ME_LOGIN, payload: { isReady: true } })
-        console.log('Response Data', data)
         window.localStorage.setItem('TDC_TOKEN', data.authToken)
         window.localStorage.setItem('TDC_USER', data._id)
+      } else {
+        dispatch({ type: ME_ERROR, payload: { error: 'Login Error' } })
+        throw new Error('Login Error')
       }
     } catch (error) {
       console.error('Login Error', error)
@@ -27,3 +26,22 @@ export const meLogin =
       throw new Error(error)
     }
   }
+
+export const meGet = () => async (dispatch) => {
+  try {
+    const user = window.localStorage.getItem('TDC_USER')
+    const { data, status } = await api.get(`${process.env.REACT_APP_API_URL}/user/${user}`)
+
+    if (status === 200 && data) {
+      dispatch({ type: ME_GET, payload: { ...data, isReady: true } })
+    } else {
+      window.localStorage.removeItem('TDC_TOKEN')
+      window.localStorage.removeItem('TDC_USER')
+      dispatch({ type: ME_ERROR, payload: { error: 'Get UserData Error' } })
+    }
+  } catch (error) {
+    window.localStorage.removeItem('TDC_TOKEN')
+    window.localStorage.removeItem('TDC_USER')
+    dispatch({ type: ME_ERROR, payload: { error: error?.message } })
+  }
+}
