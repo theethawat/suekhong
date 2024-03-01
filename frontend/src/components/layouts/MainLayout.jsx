@@ -19,18 +19,11 @@ export default function MainLayout({ title, currentPage, children }) {
       */}
       <div className="min-h-full">
         <NavHeader userData={me} currentPage={currentPage} />
-        <header className="bg-white shadow">
-          <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            <h1 className="text-2xl font-display font-bold text-gray-900">{title}</h1>
-          </div>
-        </header>
+
         <main>
-          <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 ">
-            {/* Replace with your content */}
-            <div className="px-4 py-6 sm:px-0">
-              <div className="border-2 border-gray-200 rounded-lg h-96 p-4 min-h-screen">{children}</div>
-            </div>
-            {/* /End replace */}
+          <div className="max-w-7xl mx-12 py-6 md:mx-12  container sm:ml-10 lg:px-8 ">
+            <h1 className="text-xl  font-display font-semibold text-gray-900 mt-20">{title}</h1>
+            <div className="my-2">{children}</div>
           </div>
         </main>
       </div>

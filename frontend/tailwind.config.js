@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        display: 'kanit',
+        display: 'IBM Plex Sans Thai',
       },
       colors: {
         tdc: {

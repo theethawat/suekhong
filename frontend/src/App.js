@@ -21,6 +21,7 @@ function App() {
           <Routes>
             <Route path="management">
               <Route path="user" element={<Management.ManagementUser />} />
+              <Route path="product" element={<Management.ManagementProduct />} />
             </Route>
             <Route path="dashboard">
               <Route index element={<div>dashboard index</div>} />
