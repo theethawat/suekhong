@@ -7,14 +7,19 @@ class MainService {
     this.name = name;
   }
 
-  async getAll({ page = 1, size = config.defaultLimit }) {
+  async getAll({ page = 1, size = config.defaultLimit, query = {} }) {
     try {
-      console.log('Find All');
-      const result = await this.selectedModel.find({}, null, {
+      const result = await this.selectedModel.find(query, null, {
         skip: (page - 1) * size,
         limit: parseInt(size, 10),
       });
-      const payload = { rows: result, total: _.size(result) };
+      const amount = await this.selectedModel.countDocuments(query);
+      const payload = {
+        rows: result,
+        total: amount,
+        currPage: page,
+        totalPage: Math.floor(amount / size) + 1,
+      };
       return payload;
     } catch (error) {
       console.error(error.message);

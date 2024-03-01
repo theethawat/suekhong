@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { Button } from '@mui/joy'
 import { useNavigate } from 'react-router-dom'
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { NavHeader } from '../navbar'
 
@@ -20,18 +22,18 @@ export default function MainLayout({ title, currentPage, rightContainer, useBack
           <div className="w-full py-6 md:mx-12  container px-4 lg:px-8  ">
             <div className="flex justify-between mt-20 w-full ">
               <div className="w-3/5 md:w-4/5">
-                <h1 className="text-xl  font-display font-semibold text-gray-900">{title}</h1>
+                <h1 className="text-2xl  font-display font-bold text-gray-900">{title}</h1>
               </div>
               <div className="w-2/5 md:w-1/5 flex justify-end">
                 {rightContainer}
                 {useBackButton && (
                   <Button
-                    variant="outlined"
                     color="neutral"
                     onClick={() => {
                       navigate(-1)
                     }}
                   >
+                    <FontAwesomeIcon icon={faChevronLeft} className="mr-2" />
                     กลับ
                   </Button>
                 )}

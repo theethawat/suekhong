@@ -5,8 +5,28 @@ const ProductService = new MainService(ProductModel, 'product');
 
 export const onReadAll = async (req, res) => {
   try {
-    console.log('On Read All User');
-    const result = await ProductService.getAll(req.query);
+    let query = {};
+    if (req?.query?.name) {
+      query = {
+        $or: [
+          {
+            name: {
+              $regex: req?.query?.name,
+            },
+          },
+          {
+            type_code: {
+              $regex: req?.query?.name,
+            },
+          },
+        ],
+      };
+    }
+
+    const result = await ProductService.getAll({
+      ...req.query,
+      query,
+    });
     res.status(200).send(result);
   } catch (error) {
     res.status(404).send({ error });

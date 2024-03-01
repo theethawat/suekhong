@@ -23,7 +23,7 @@ class GeneralAction {
         )
 
         if (status === 200 && data) {
-          dispatch({ type: this.allConst, payload: { rows: data?.rows, isReady: true } })
+          dispatch({ type: this.allConst, payload: { ...data, isReady: true } })
         } else {
           dispatch({ type: this.errorConst, payload: { error: `Get ${this.name} Error` } })
         }

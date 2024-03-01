@@ -25,7 +25,8 @@ function App() {
             </Route>
             <Route path="product">
               <Route index element={<Management.ManagementProduct />} />
-              <Route path="create" element={<Management.CreateProduct />} />
+              <Route path="create" element={<Management.CreateProduct />} />{' '}
+              <Route path="edit/:id" element={<Management.EditProduct />} />
             </Route>
             <Route path="dashboard">
               <Route index element={<div>dashboard index</div>} />
