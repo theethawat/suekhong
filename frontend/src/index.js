@@ -1,18 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
+import { CssVarsProvider } from '@mui/joy/styles'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 
 import './index.css'
 import configureStore from './redux/configureStore'
+import themeConfig from './themeConfig'
 
 const store = configureStore()
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <CssVarsProvider theme={themeConfig}>
+        <App />
+      </CssVarsProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'),
