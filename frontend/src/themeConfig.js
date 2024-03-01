@@ -1,26 +1,26 @@
 import { extendTheme } from '@mui/joy/styles'
 
 const themeConfig = extendTheme({
-  colorSchemes: {
-    light: {
-      palette: {
-        primary: {
-          solidBg: '#228be6',
-          solidHoverBg: '#1c7ed6',
-          solidActiveBg: undefined,
-          softColor: '#228be6',
-          softBg: 'rgba(231, 245, 255, 1)',
-          softHoverBg: 'rgba(208, 235, 255, 0.65)',
-          softActiveBg: undefined,
-          outlinedColor: '#228be6',
-          outlinedBorder: '#228be6',
-          outlinedHoverBg: 'rgba(231, 245, 255, 0.35)',
-          outlinedHoverBorder: undefined,
-          outlinedActiveBg: undefined,
-        },
-      },
-    },
-  },
+  // colorSchemes: {
+  //   light: {
+  //     palette: {
+  //       primary: {
+  //         solidBg: '#228be6',
+  //         solidHoverBg: '#1c7ed6',
+  //         solidActiveBg: undefined,
+  //         softColor: '#228be6',
+  //         softBg: 'rgba(231, 245, 255, 1)',
+  //         softHoverBg: 'rgba(208, 235, 255, 0.65)',
+  //         softActiveBg: undefined,
+  //         outlinedColor: '#228be6',
+  //         outlinedBorder: '#228be6',
+  //         outlinedHoverBg: 'rgba(231, 245, 255, 0.35)',
+  //         outlinedHoverBorder: undefined,
+  //         outlinedActiveBg: undefined,
+  //       },
+  //     },
+  //   },
+  // },
   fontFamily: {
     body: 'IBM Plex Sans Thai,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji',
   },
