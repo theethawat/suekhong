@@ -10,8 +10,8 @@ const ProductAction = new GeneralAction('product', 'Product', {
   deleteConst: PRODUCT_DELETE,
 })
 
-export const getAllProduct = ProductAction.getAllData
-export const getOneProduct = ProductAction.getOneData
-export const createOneProduct = ProductAction.createOne
-export const updateOneProduct = ProductAction.editOne
-export const deleteOneProduct = ProductAction.deleteOne
+export const getAllProduct = (query) => ProductAction.getAllData(query)
+export const getOneProduct = (id) => ProductAction.getOneData(id)
+export const createOneProduct = (data) => ProductAction.createOne(data)
+export const updateOneProduct = (id, payload) => ProductAction.editOne(id, payload)
+export const deleteOneProduct = (id) => ProductAction.deleteOne(id)

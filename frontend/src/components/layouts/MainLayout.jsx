@@ -2,27 +2,44 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
+import { Button } from '@mui/joy'
+import { useNavigate } from 'react-router-dom'
 
 import { NavHeader } from '../navbar'
 
-export default function MainLayout({ title, currentPage, rightContainer, children }) {
+// eslint-disable-next-line max-len
+export default function MainLayout({ title, currentPage, rightContainer, useBackButton, children }) {
   const me = useSelector((state) => state.me)
+  const navigate = useNavigate()
   return (
     <div>
       <div className="min-h-full">
         <NavHeader userData={me} currentPage={currentPage} />
 
-        <main>
-          <div className="w-full  mx-12 py-6 md:mx-12  container sm:ml-10 lg:px-8 ">
-            <div className="flex  mt-20">
-              <div className="w-3/5 lg:w-4/5">
+        <div>
+          <div className="w-full py-6 md:mx-12  container px-4 lg:px-8  ">
+            <div className="flex justify-between mt-20 w-full ">
+              <div className="w-3/5 md:w-4/5">
                 <h1 className="text-xl  font-display font-semibold text-gray-900">{title}</h1>
               </div>
-              <div className="w-1/5">{rightContainer}</div>
+              <div className="w-2/5 md:w-1/5 flex justify-end">
+                {rightContainer}
+                {useBackButton && (
+                  <Button
+                    variant="outlined"
+                    color="neutral"
+                    onClick={() => {
+                      navigate(-1)
+                    }}
+                  >
+                    กลับ
+                  </Button>
+                )}
+              </div>
             </div>
-            <div className="my-2">{children}</div>
+            <div className="my-2 ">{children}</div>
           </div>
-        </main>
+        </div>
       </div>
     </div>
   )
@@ -33,10 +50,12 @@ MainLayout.propTypes = {
   currentPage: PropTypes.string,
   rightContainer: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
+  useBackButton: PropTypes.bool,
 }
 
 MainLayout.defaultProps = {
   title: '',
   currentPage: '',
   rightContainer: <div />,
+  useBackButton: false,
 }

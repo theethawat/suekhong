@@ -9,17 +9,16 @@ class MainService {
 
   async getAll({ page = 1, size = config.defaultLimit }) {
     try {
+      console.log('Find All');
       const result = await this.selectedModel.find({}, null, {
         skip: (page - 1) * size,
-        limit: size,
+        limit: parseInt(size, 10),
       });
       const payload = { rows: result, total: _.size(result) };
       return payload;
     } catch (error) {
-      throw Error(
-        `DB_FALSE_READ Database fetching have problem in model ${this.name}`,
-        error,
-      );
+      console.error(error.message);
+      throw error;
     }
   }
 

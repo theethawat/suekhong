@@ -6,10 +6,7 @@ const ProductService = new MainService(ProductModel, 'product');
 export const onReadAll = async (req, res) => {
   try {
     console.log('On Read All User');
-    const result = await ProductService.getAll({
-      page: req?.query?.page || '',
-      size: req?.query?.size || '',
-    });
+    const result = await ProductService.getAll(req.query);
     res.status(200).send(result);
   } catch (error) {
     res.status(404).send({ error });
@@ -27,8 +24,13 @@ export const onReadOne = async (req, res) => {
 
 export const onCreateOne = async (req, res) => {
   try {
-    const result = await ProductService.createOne(req.body);
-    res.status(201).send(result);
+    if (req?.body?.many === true) {
+      const results = await ProductModel.insertMany(req?.body?.arr);
+      res.status(201).send(results);
+    } else {
+      const result = await ProductService.createOne(req.body);
+      res.status(201).send(result);
+    }
   } catch (error) {
     res.status(400).send({ error });
   }

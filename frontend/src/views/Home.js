@@ -25,7 +25,7 @@ function Home() {
             </Link>
           </div>
           <div className="">
-            <Link to="/management/product">
+            <Link to="/product">
               <Button size="lg" color="neutral" fullWidth>
                 <div className="py-8">
                   <div className="text-center text-2xl">

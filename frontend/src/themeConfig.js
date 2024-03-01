@@ -24,32 +24,32 @@ const themeConfig = extendTheme({
   fontFamily: {
     body: 'IBM Plex Sans Thai,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji',
   },
-  focus: {
-    default: {
-      outlineWidth: '2px',
-      outlineOffset: '2px',
-      outlineColor: '#339af0',
-    },
-  },
-  components: {
-    JoyButton: {
-      styleOverrides: {
-        root: ({ ownerState }) => ({
-          transition: 'initial',
-          borderRadius: '4px',
-          fontWeight: 600,
-          ...(ownerState.size === 'md' && {
-            minHeight: '36px',
-            fontSize: '14px',
-            paddingInline: '18px',
-          }),
-          '&:active': {
-            transform: 'translateY(1px)',
-          },
-        }),
-      },
-    },
-  },
+  // focus: {
+  //   default: {
+  //     outlineWidth: '2px',
+  //     outlineOffset: '2px',
+  //     outlineColor: '#339af0',
+  //   },
+  // },
+  // components: {
+  //   JoyButton: {
+  //     styleOverrides: {
+  //       root: ({ ownerState }) => ({
+  //         transition: 'initial',
+  //         borderRadius: '4px',
+  //         fontWeight: 600,
+  //         ...(ownerState.size === 'md' && {
+  //           minHeight: '36px',
+  //           fontSize: '14px',
+  //           paddingInline: '18px',
+  //         }),
+  //         '&:active': {
+  //           transform: 'translateY(1px)',
+  //         },
+  //       }),
+  //     },
+  //   },
+  // },
 })
 
 export default themeConfig

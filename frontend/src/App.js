@@ -23,6 +23,10 @@ function App() {
               <Route path="user" element={<Management.ManagementUser />} />
               <Route path="product" element={<Management.ManagementProduct />} />
             </Route>
+            <Route path="product">
+              <Route index element={<Management.ManagementProduct />} />
+              <Route path="create" element={<Management.CreateProduct />} />
+            </Route>
             <Route path="dashboard">
               <Route index element={<div>dashboard index</div>} />
             </Route>
