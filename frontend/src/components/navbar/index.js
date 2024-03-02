@@ -1,4 +1,5 @@
 import NavHeader from './NavHeader'
+import Footer from './Footer'
 
-export { NavHeader }
-export default { NavHeader }
+export { NavHeader, Footer }
+export default { NavHeader, Footer }

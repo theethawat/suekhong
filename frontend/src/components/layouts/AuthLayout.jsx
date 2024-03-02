@@ -3,6 +3,9 @@ import React from 'react'
 import { Disclosure } from '@headlessui/react'
 import PropTypes from 'prop-types'
 import { app } from '../../configs'
+import logovan from '../../logovan.png'
+import { Footer } from '../navbar'
+
 export default function AuthLayout({ title, children }) {
   return (
     <>
@@ -21,11 +24,7 @@ export default function AuthLayout({ title, children }) {
               <div className="flex items-center justify-between h-16">
                 <div className="flex items-center gap-2">
                   <div className="flex-shrink-0">
-                    <img
-                      className="h-8 w-8"
-                      src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                      alt="Workflow"
-                    />
+                    <img className="h-8 w-8" src={logovan} alt="App Logo" />
                   </div>
                   <div className="text-xl font-display font-semibold">{app.appNameTH}</div>
                 </div>
@@ -47,6 +46,7 @@ export default function AuthLayout({ title, children }) {
           </div>
         </main>
       </div>
+      <Footer />
     </>
   )
 }

@@ -45,3 +45,10 @@ export const meGet = () => async (dispatch) => {
     dispatch({ type: ME_ERROR, payload: { error: error?.message } })
   }
 }
+
+export const meLogOut = () => (dispatch) => {
+  window.localStorage.removeItem('TDC_TOKEN')
+  window.localStorage.removeItem('TDC_USER')
+  window.location.reload('')
+  dispatch({ type: ME_ERROR, payload: { error: 'Logout' } })
+}

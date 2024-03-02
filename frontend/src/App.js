@@ -44,6 +44,7 @@ function App() {
             <Route>
               <Route path="login" element={<Auth.Login />} />
               <Route index element={<Auth.Login />} />
+              <Route path="*" element={<Auth.Login />} />
             </Route>
           </Routes>
         )}

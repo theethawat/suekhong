@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { NavHeader } from '../navbar'
+import { NavHeader, Footer } from '../navbar'
 
 // eslint-disable-next-line max-len
 export default function MainLayout({ title, currentPage, rightContainer, useBackButton, children }) {
@@ -15,7 +15,7 @@ export default function MainLayout({ title, currentPage, rightContainer, useBack
   const navigate = useNavigate()
   return (
     <div>
-      <div className="min-h-full">
+      <div className="min-h-screen">
         <NavHeader userData={me} currentPage={currentPage} />
 
         <div>
@@ -43,6 +43,7 @@ export default function MainLayout({ title, currentPage, rightContainer, useBack
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }
