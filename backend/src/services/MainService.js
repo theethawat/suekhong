@@ -7,12 +7,30 @@ class MainService {
     this.name = name;
   }
 
-  async getAll({ page = 1, size = config.defaultLimit, query = {} }) {
+  async getAll({
+    page = 1,
+    size = config.defaultLimit,
+    query = {},
+    populateKey,
+  }) {
     try {
-      const result = await this.selectedModel.find(query, null, {
-        skip: (page - 1) * size,
-        limit: parseInt(size, 10),
-      });
+      let result;
+      if (populateKey) {
+        result = await this.selectedModel
+          .find(query, null, {
+            skip: (page - 1) * size,
+            limit: parseInt(size, 10),
+            sort: { createdAt: -1 },
+          })
+          .populate(populateKey);
+      } else {
+        result = await this.selectedModel.find(query, null, {
+          skip: (page - 1) * size,
+          limit: parseInt(size, 10),
+          sort: { createdAt: -1 },
+        });
+      }
+
       const amount = await this.selectedModel.countDocuments(query);
       const payload = {
         rows: result,
@@ -27,9 +45,14 @@ class MainService {
     }
   }
 
-  async getOne(id) {
+  async getOne(id, populateKey = null) {
     try {
-      const result = await this.selectedModel.findById(id);
+      let result;
+      if (populateKey) {
+        result = await this.selectedModel.findById(id).populate(populateKey);
+      } else {
+        result = await this.selectedModel.findById(id);
+      }
       return result;
     } catch (error) {
       throw Error('DB_FALSE_READ Database fetching have problem', error);

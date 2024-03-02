@@ -1,43 +1,7 @@
 import MainService from '../services/MainService';
 import ShoppingListModel from '../models/ShoppingList';
 
-class ShoppingListServiceClass extends MainService {
-  constructor(props) {
-    super(props);
-  }
-
-  async getAll({
-    page = 1,
-    size = config.defaultLimit,
-    query = {},
-    populateKey = '',
-  }) {
-    try {
-      const result = await this.selectedModel
-        .find(query, null, {
-          skip: (page - 1) * size,
-          limit: parseInt(size, 10),
-        })
-        .populate(populateKey);
-      const amount = await this.selectedModel.countDocuments(query);
-      const payload = {
-        rows: result,
-        total: amount,
-        currPage: page,
-        totalPage: Math.floor(amount / size) + 1,
-      };
-      return payload;
-    } catch (error) {
-      console.error(error.message);
-      throw error;
-    }
-  }
-}
-
-const ShoppingListService = new ShoppingListServiceClass(
-  ShoppingListModel,
-  'shoppinglist',
-);
+const ShoppingListService = new MainService(ShoppingListModel, 'shoppinglist');
 
 export const onReadAll = async (req, res) => {
   try {
@@ -56,7 +20,10 @@ export const onReadAll = async (req, res) => {
 
 export const onReadOne = async (req, res) => {
   try {
-    const result = await ShoppingListService.getOne(req.params.id);
+    const result = await ShoppingListService.getOne(
+      req.params.id,
+      'products.product',
+    );
     res.status(200).send(result);
   } catch (error) {
     res.status(404).send({ error });

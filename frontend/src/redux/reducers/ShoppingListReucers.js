@@ -18,7 +18,7 @@ export default function ShoppingListReducer(state = initialState, action) {
     case SHOPPING_LIST_GET:
       return { ...action.payload, isReady: true }
     case SHOPPING_LIST_CREATE:
-      return { ...action.payload, isReady: false }
+      return { ...action.payload, isReady: false, isCreate: true }
     case SHOPPING_LIST_ERROR:
       return { ...action.payload, isReady: false }
     case SHOPPING_LIST_EDIT:

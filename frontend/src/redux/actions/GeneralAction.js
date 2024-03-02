@@ -55,7 +55,7 @@ class GeneralAction {
         const { data, status } = await api.post(`${process.env.REACT_APP_API_URL}/${this.subURL}`, payload)
 
         if (status === 201 && data) {
-          dispatch({ type: this.createConst, payload: { ...data, isReady: false } })
+          dispatch({ type: this.createConst, payload: { ...data, isReady: false, isCreate: true } })
         } else {
           dispatch({ type: this.errorConst, payload: { error: `Create ${this.name} Error` } })
         }

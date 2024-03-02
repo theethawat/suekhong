@@ -96,10 +96,10 @@ export default function ShoppingListManagement() {
                 <tr key={index}>
                   <td>{dayjs(each?.createdAt).locale('th').format('dddd D MMM HH:mm')}</td>
                   <td className="flex gap-2">
-                    <Link to={`/product/edit/${each?._id}`}>
+                    <Link to={`/shopping-list/detail/${each?._id}`}>
                       <Button size="sm">รายละเอียด</Button>
                     </Link>
-                    <Link to={`/product/edit/${each?._id}`}>
+                    <Link to={`/shopping-list/edit/${each?._id}`}>
                       <Button size="sm" color="warning">
                         แก้ไข
                       </Button>

@@ -31,6 +31,7 @@ function App() {
             <Route path="shopping-list">
               <Route index element={<ShoppingList.ShoppingListManagement />} />
               <Route path="create" element={<ShoppingList.CreateShoppingList />} />{' '}
+              <Route path="detail/:id" element={<ShoppingList.DetailShoppingList />} />{' '}
             </Route>
             <Route path="dashboard">
               <Route index element={<div>dashboard index</div>} />

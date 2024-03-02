@@ -4,7 +4,12 @@ const { Schema } = Mongoose;
 
 const ShoppingListSchema = new Schema(
   {
-    products: [{ product: Mongoose.Types.ObjectId, amount: Number }],
+    products: [
+      {
+        product: { type: Mongoose.Types.ObjectId, ref: 'Product' },
+        amount: Number,
+      },
+    ],
     note: String,
   },
   {

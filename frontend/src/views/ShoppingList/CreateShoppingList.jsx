@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, Sheet, Table, LinearProgress, Input, ButtonGroup } from '@mui/joy'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { useForm, useFieldArray, Controller } from 'react-hook-form'
@@ -44,11 +44,13 @@ function AmountAdding({ appendFunction, selectedData, disabled = false }) {
 export default function CreateShoppingList() {
   const [isReady, setIsReady] = useState(false)
   const product = useSelector((state) => state.product)
+  const shoppingList = useSelector((state) => state.shoppingList)
   const [page, setPage] = useState(1)
   const [size, setSize] = useState(25)
   const [name, setName] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { control, handleSubmit } = useForm()
   const { fields, remove, append } = useFieldArray({
     control,
@@ -79,15 +81,25 @@ export default function CreateShoppingList() {
   }, [searchTerm])
 
   const handleCreateShoppingList = (payload) => {
-    console.log('Payload', payload)
-    dispatch(actions.createOneShoppingList(payload))
-      .then((result) => {
-        console.log('Result', result)
-      })
+    const preparedPayload = _.map(payload?.products, (eachProd) => ({
+      product: eachProd?._id,
+      amount: eachProd?.amount,
+    }))
+    console.log('Prepared payload', preparedPayload)
+    dispatch(actions.createOneShoppingList({ products: preparedPayload }))
+      .then(() => {})
       .catch((err) => {
         window.alert(`ไม่สามารถสร้างรายการสั่งซื้อได้ ${err?.message}`)
       })
   }
+
+  useEffect(() => {
+    if (shoppingList?.isCreate) {
+      navigate(`/shopping-list/detail/${shoppingList?._id}`)
+    }
+
+    return () => {}
+  }, [shoppingList])
 
   const rightButton = (
     <div>
