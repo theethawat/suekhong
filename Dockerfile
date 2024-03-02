@@ -19,7 +19,7 @@ WORKDIR /home/node/app
 # Copy Package.json
 COPY backend/ /home/node/app/
 COPY process.yml /home/node/app/
-RUN npm install 
+RUN npm install  --legacy-peer-deps
 RUN npm install -g pm2
 
 
