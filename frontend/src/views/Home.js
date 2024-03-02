@@ -13,7 +13,7 @@ function Home() {
       <div>
         <div className="grid grid-cols-1 md:grid-cols-2 w-3/4 md:w-1/2 gap-2">
           <div className="">
-            <Link to="/shoping-list/create">
+            <Link to="/shopping-list/create">
               <Button size="lg" fullWidth>
                 <div className="py-8">
                   <div className="text-center text-2xl">
