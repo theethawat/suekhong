@@ -1,0 +1,5 @@
+apps:
+  - script: src/index.js
+    name: 'suekhong'
+    env:
+      NODE_ENV: production
