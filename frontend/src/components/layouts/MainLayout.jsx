@@ -21,10 +21,10 @@ export default function MainLayout({ title, currentPage, rightContainer, useBack
         <div>
           <div className="w-full py-6 md:mx-12  container px-4 lg:px-8  ">
             <div className="flex justify-between mt-20 w-full ">
-              <div className="w-3/5 md:w-4/5">
+              <div className="w-3/5 ">
                 <h1 className="text-2xl  font-display font-bold text-gray-900">{title}</h1>
               </div>
-              <div className="w-2/5 md:w-1/5 flex justify-end">
+              <div className="w-2/5 flex justify-end">
                 {rightContainer}
                 {useBackButton && (
                   <Button

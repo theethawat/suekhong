@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Button, Sheet, Table, LinearProgress, Input, ButtonGroup } from '@mui/joy'
 import { Link, useParams } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { faSquareShareNodes, faCopy } from '@fortawesome/free-solid-svg-icons'
 import _ from 'lodash'
 
 import { MainLayout } from '../../components/layouts'
@@ -36,7 +36,7 @@ export default function DetailShoppingList() {
   const rightButton = (
     <div className="mr-2">
       <Link to={`/shopping-list/edit/${params.id}`}>
-        <Button>แก้ไข</Button>
+        <Button color="warning">แก้ไข</Button>
       </Link>
     </div>
   )
@@ -48,6 +48,11 @@ export default function DetailShoppingList() {
       </div>
     )
   }
+
+  const textShoppingList = _.map(
+    shoppingList?.products,
+    (each, index) => `${index + 1} ${each?.product?.type_code || ''} - ${each?.product?.name} จำนวน ${each?.amount} \n`,
+  )
 
   return (
     <div>
@@ -86,6 +91,26 @@ export default function DetailShoppingList() {
             </tbody>
           </Table>
         </Sheet>
+        <div className="flex gap-2">
+          <Button
+            onClick={() => {
+              navigator.share({ title: 'รายการสั่งซื้อสินค้า', text: textShoppingList })
+            }}
+          >
+            <FontAwesomeIcon icon={faSquareShareNodes} className="mr-2" />
+            แชร์
+          </Button>
+          <Button
+            color="success"
+            onClick={() => {
+              navigator.clipboard.writeText(textShoppingList)
+              alert('คัดลอกลงในคลิปบอร์ดสำเร็จ สามารถเปิดแอพพลิเคชั่นอื่นเพื่อวางได้เลย')
+            }}
+          >
+            <FontAwesomeIcon icon={faCopy} className="mr-2" />
+            คัดลอก
+          </Button>
+        </div>
       </MainLayout>
     </div>
   )

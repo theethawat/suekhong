@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, Sheet, Table, LinearProgress, Input, ButtonGroup } from '@mui/joy'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { useForm, useFieldArray, Controller } from 'react-hook-form'
@@ -41,17 +41,18 @@ function AmountAdding({ appendFunction, selectedData, disabled = false }) {
   )
 }
 
-export default function CreateShoppingList() {
+export default function EditShoppingList() {
   const [isReady, setIsReady] = useState(false)
   const product = useSelector((state) => state.product)
   const shoppingList = useSelector((state) => state.shoppingList)
+  const params = useParams()
   const [page, setPage] = useState(1)
   const [size, setSize] = useState(25)
   const [name, setName] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { control, handleSubmit } = useForm()
+  const { control, handleSubmit, setValue } = useForm()
   const { fields, remove, append } = useFieldArray({
     control,
     name: 'products',
@@ -73,6 +74,23 @@ export default function CreateShoppingList() {
   }, [name, page, size])
 
   useEffect(() => {
+    dispatch(actions.getOneShoppingList(params.id))
+
+    return () => {}
+  }, [])
+
+  useEffect(() => {
+    if (shoppingList?.products) {
+      setValue(
+        'products',
+        _.map(shoppingList?.products, (each) => ({ ...each?.product, amount: each?.amount })),
+      )
+    }
+
+    return () => {}
+  }, [shoppingList])
+
+  useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       setName(searchTerm)
       setPage(1)
@@ -86,23 +104,17 @@ export default function CreateShoppingList() {
       amount: eachProd?.amount,
     }))
     console.log('Prepared payload', preparedPayload)
-    dispatch(actions.createOneShoppingList({ products: preparedPayload }))
-      .then(() => {})
+    dispatch(actions.updateOneShoppingList(params.id, { products: preparedPayload }))
+      .then(() => {
+        navigate(-1)
+      })
       .catch((err) => {
         window.alert(`ไม่สามารถสร้างรายการสั่งซื้อได้ ${err?.message}`)
       })
   }
 
-  useEffect(() => {
-    if (shoppingList?.isCreate) {
-      navigate(`/shopping-list/detail/${shoppingList?._id}`)
-    }
-
-    return () => {}
-  }, [shoppingList])
-
   const rightButton = (
-    <div>
+    <div className="mr-2">
       <Button color="success" onClick={handleSubmit(handleCreateShoppingList)}>
         บันทึกรายการ
       </Button>
@@ -116,7 +128,7 @@ export default function CreateShoppingList() {
 
   return (
     <div>
-      <MainLayout title="เพิ่มรายการสั่งซื้อของ" currentPage="Store" rightContainer={rightButton}>
+      <MainLayout title="แก้ไขรายการสั่งของ" currentPage="Store" rightContainer={rightButton} useBackButton>
         <div className="my-4">
           <h3 className="text-lg font-semibold font-display my-2">รายการที่เตรียมบันทึก</h3>
           <Sheet>
@@ -138,7 +150,7 @@ export default function CreateShoppingList() {
                       name={`products[${index}].amount`}
                       defaultValue={each?.amount}
                       render={({ field }) => <Input {...field} placeholder="จำนวน" size="sm" />}
-                    />{' '}
+                    />
                     <Button
                       size="sm"
                       color="danger"

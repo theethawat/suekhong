@@ -47,7 +47,7 @@ export default function ShoppingListManagement() {
   const handleDelete = (id) => {
     const confirm = window.confirm('ยืนยันการลบ')
     if (confirm) {
-      dispatch(actions.deleteOneProduct(id))
+      dispatch(actions.deleteOneShoppingList(id))
         .then(() => {
           getAllData()
         })
