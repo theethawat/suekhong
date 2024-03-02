@@ -1,4 +1,4 @@
 export default {
-  appNameEN: 'Bangriang',
-  appNameTH: 'สวนกล้วยบาางเหรียง',
+  appNameEN: 'Suekhong - ซื้อของ',
+  appNameTH: 'Suekhong - ซื้อของ',
 }

@@ -6,21 +6,23 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import _ from 'lodash'
+import dayjs from 'dayjs'
+import 'dayjs/locale/th'
 
 import { MainLayout } from '../../components/layouts'
 import * as actions from '../../redux/actions'
 
 export default function ShoppingListManagement() {
   const [isReady, setIsReady] = useState(false)
-  const product = useSelector((state) => state.product)
+  const shoppingList = useSelector((state) => state.shoppingList)
   const [page, setPage] = useState(1)
   const [size, setSize] = useState(10)
-  const [name, setName] = useState('')
-  const [searchTerm, setSearchTerm] = useState('')
+  // const [name, setName] = useState('')
+  // const [searchTerm, setSearchTerm] = useState('')
   const dispatch = useDispatch()
 
   const getAllData = () => {
-    dispatch(actions.getAllProduct({ page, size, name }))
+    dispatch(actions.getAllShoppingList({ page, size }))
       .then(() => {
         setIsReady(true)
       })
@@ -32,15 +34,15 @@ export default function ShoppingListManagement() {
     getAllData()
 
     return () => {}
-  }, [name, page, size])
+  }, [page, size])
 
-  useEffect(() => {
-    const delayDebounceFn = setTimeout(() => {
-      setName(searchTerm)
-      setPage(1)
-    }, 700)
-    return () => clearTimeout(delayDebounceFn)
-  }, [searchTerm])
+  // useEffect(() => {
+  //   const delayDebounceFn = setTimeout(() => {
+  //     setName(searchTerm)
+  //     setPage(1)
+  //   }, 700)
+  //   return () => clearTimeout(delayDebounceFn)
+  // }, [searchTerm])
 
   const handleDelete = (id) => {
     const confirm = window.confirm('ยืนยันการลบ')
@@ -56,8 +58,8 @@ export default function ShoppingListManagement() {
   }
 
   const rightButton = (
-    <div>
-      <Link to="/product/create">
+    <div className="mr-2">
+      <Link to="/shopping-list/create">
         <Button>เพิ่ม</Button>
       </Link>
     </div>
@@ -73,29 +75,30 @@ export default function ShoppingListManagement() {
 
   return (
     <div>
-      <MainLayout title="จัดการรายการสั่งซื้อ" currentPage="Store" rightContainer={rightButton}>
-        <div className="my-4 lg:w-1/2">
+      <MainLayout title="ประวัติรายการสั่งซื้อ" currentPage="Store" rightContainer={rightButton} useBackButton>
+        {/* <div className="my-4 lg:w-1/2">
           <Input
             placeholder="ค้นหา"
             startDecorator={<FontAwesomeIcon icon={faMagnifyingGlass} />}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-        </div>
-        {/* <Sheet>
+        </div> */}
+        <Sheet>
           <Table size="lg" stripe="odd">
             <thead>
               <tr>
-                <th style={{ width: '30%' }}>รหัสสินค้า</th>
-                <th>ชื่อสินค้า</th>
-                <th>ดำเนินการ</th>
+                <th style={{ width: '30%' }}>วันที่</th>
+                <th>รายละเอียด</th>
               </tr>
             </thead>
             <tbody>
-              {_.map(product?.rows, (each, index) => (
+              {_.map(shoppingList?.rows, (each, index) => (
                 <tr key={index}>
-                  <td>{each?.type_code}</td>
-                  <td>{each?.name}</td>
+                  <td>{dayjs(each?.createdAt).locale('th').format('dddd D MMM HH:mm')}</td>
                   <td className="flex gap-2">
+                    <Link to={`/product/edit/${each?._id}`}>
+                      <Button size="sm">รายละเอียด</Button>
+                    </Link>
                     <Link to={`/product/edit/${each?._id}`}>
                       <Button size="sm" color="warning">
                         แก้ไข
@@ -107,7 +110,7 @@ export default function ShoppingListManagement() {
                   </td>
                 </tr>
               ))}
-              {_.isEmpty(product?.rows) && (
+              {_.isEmpty(shoppingList?.rows) && (
                 <tr>
                   <td colSpan={3}>ยังไม่มีสินค้า</td>
                 </tr>
@@ -125,14 +128,14 @@ export default function ShoppingListManagement() {
                 <FontAwesomeIcon icon={faChevronLeft} />
               </Button>
               <Button disabled>
-                หน้า {page} จาก {product?.totalPage}{' '}
+                หน้า {page} จาก {shoppingList?.totalPage}{' '}
               </Button>
-              <Button disabled={!(product?.totalPage > page)} onClick={() => setPage(page + 1)}>
+              <Button disabled={!(shoppingList?.totalPage > page)} onClick={() => setPage(page + 1)}>
                 <FontAwesomeIcon icon={faChevronRight} />
               </Button>
             </ButtonGroup>
           </div>
-        </Sheet> */}
+        </Sheet>
       </MainLayout>
     </div>
   )

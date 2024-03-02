@@ -1,11 +1,12 @@
 import React from 'react'
 import { useNavigate } from 'react-router'
-import { TextInput, Button } from '@mantine/core'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
+import { Button, Input } from '@mui/joy'
 
 import { AuthLayout } from '../../components/layouts'
 import * as actions from '../../redux/actions'
+import { app } from '../../configs'
 
 export default function Login() {
   const navigate = useNavigate()
@@ -16,6 +17,7 @@ export default function Login() {
     dispatch(actions.meLogin(data))
       .then(() => {
         navigate('/')
+        window.location.reload()
       })
       .catch((err) => {
         window.alert(err?.message)
@@ -23,24 +25,21 @@ export default function Login() {
   }
 
   return (
-    <AuthLayout title="Login">
+    <AuthLayout title="">
       <div>
         <div className="flex justify-center">
           <div className="w-full lg:w-1/3 md:w-1/2 m-2 p-2">
-            <h1 className="text-2xl font-semibold my-2 text-center">
-              Bangriang Garden
-            </h1>
+            <h1 className="text-2xl font-semibold my-2 text-center font-display">{app.appNameTH}</h1>
+            <div className="text-center font-display">ลงชื่อเข้าใช้ระบบ</div>
+            <hr className="my-2" />
             <form onSubmit={handleSubmit(handleLogin)}>
               <div className="my-2">
-                <TextInput
-                  label="Username"
-                  name="username"
-                  {...register('username')}
-                  placeholder="username"
-                />
+                <div className="my-1">Username</div>
+                <Input label="Username" name="username" {...register('username')} placeholder="username" />
               </div>
               <div className="my-2">
-                <TextInput
+                <div className="my-1">Password</div>
+                <Input
                   label="Password"
                   name="password"
                   placeholder="password"
@@ -49,7 +48,7 @@ export default function Login() {
                 />
               </div>
               <div className="w-full my-4">
-                <Button variant="outline" color="cyan" fullWidth type="submit">
+                <Button fullWidth type="submit">
                   Login
                 </Button>
               </div>

@@ -9,6 +9,7 @@ import PropTypes from 'prop-types'
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import { app } from '../../configs'
 /* This example requires Tailwind CSS v2.0+ */
 
 export default function NavHeader({ userData, currentPage }) {
@@ -19,7 +20,7 @@ export default function NavHeader({ userData, currentPage }) {
           <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
             <span className="self-center text-lg font-semibold  whitespace-nowrap dark:text-white font-display">
-              Suekhong - ซื้อของ
+              {app.appNameTH}
             </span>
           </Link>
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">

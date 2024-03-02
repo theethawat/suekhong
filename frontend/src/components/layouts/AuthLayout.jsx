@@ -2,7 +2,7 @@
 import React from 'react'
 import { Disclosure } from '@headlessui/react'
 import PropTypes from 'prop-types'
-
+import { app } from '../../configs'
 export default function AuthLayout({ title, children }) {
   return (
     <>
@@ -27,23 +27,21 @@ export default function AuthLayout({ title, children }) {
                       alt="Workflow"
                     />
                   </div>
-                  <div className="text-xl font-display font-semibold">Bangriang</div>
+                  <div className="text-xl font-display font-semibold">{app.appNameTH}</div>
                 </div>
               </div>
             </div>
           )}
         </Disclosure>
 
-        <header className="bg-white shadow">
-          <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            <h1 className="text-2xl font-display font-bold text-gray-900">{title}</h1>
-          </div>
-        </header>
+        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+          <h1 className="text-xl font-display font-bold text-gray-900">{title}</h1>
+        </div>
         <main>
           <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-6">
             {/* Replace with your content */}
             <div className="px-4 py-6 sm:px-0">
-              <div className="border-2  border-gray-200 rounded-lg min-h-screen p-4">{children}</div>
+              <div className=" rounded-lg min-h-screen p-4">{children}</div>
             </div>
             {/* /End replace */}
           </div>

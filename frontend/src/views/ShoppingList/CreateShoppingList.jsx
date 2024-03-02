@@ -49,10 +49,10 @@ export default function CreateShoppingList() {
   const [name, setName] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
   const dispatch = useDispatch()
-  const { control } = useForm()
+  const { control, handleSubmit } = useForm()
   const { fields, remove, append } = useFieldArray({
     control,
-    name: 'selected',
+    name: 'products',
   })
 
   const getAllData = () => {
@@ -78,9 +78,22 @@ export default function CreateShoppingList() {
     return () => clearTimeout(delayDebounceFn)
   }, [searchTerm])
 
+  const handleCreateShoppingList = (payload) => {
+    console.log('Payload', payload)
+    dispatch(actions.createOneShoppingList(payload))
+      .then((result) => {
+        console.log('Result', result)
+      })
+      .catch((err) => {
+        window.alert(`ไม่สามารถสร้างรายการสั่งซื้อได้ ${err?.message}`)
+      })
+  }
+
   const rightButton = (
     <div>
-      <Button color="success">บันทึกรายการ</Button>
+      <Button color="success" onClick={handleSubmit(handleCreateShoppingList)}>
+        บันทึกรายการ
+      </Button>
     </div>
   )
 
@@ -108,7 +121,7 @@ export default function CreateShoppingList() {
                   <td>{each?.type_code}</td>
                   <td>{each?.name}</td>
                   <td className="flex gap-2">
-                    <Input defaultValue={1} placeholder="จำนวน" size="sm" />
+                    <Input defaultValue={each?.amount} placeholder="จำนวน" size="sm" />
                     <Button
                       size="sm"
                       color="danger"
